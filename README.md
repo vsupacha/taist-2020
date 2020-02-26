@@ -21,6 +21,8 @@ Event queue with separate thread to run EventQueue service, then use IRQ handler
 Examples to demonstrate mbed's protocol stacks. 
 * USER_BUTTON, LED1, and WiFi interface are used as hardware
 * [ISM43362 WiFi library](https://github.com/ARMmbed/wifi-ism43362)
+* [mbed HTTP library](https://os.mbed.com/teams/sandbox/code/mbed-http/)
+* [mbed MQTT library](https://github.com/ARMmbed/mbed-mqtt)
 
 ### push-to-serial
 Example code for serial port.
