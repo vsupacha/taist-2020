@@ -18,7 +18,7 @@ typedef struct {
 static const GapScanParam_t scanning_params[] = {
 /*                      interval                  window                   duration  active */
 /*                      0.625ms                  0.625ms                       10ms         */
-    {   ble::scan_interval_t(4),   ble::scan_window_t(4),   ble::scan_duration_t(5), false },
+    {   ble::scan_interval_t(160),   ble::scan_window_t(100),   ble::scan_duration_t(300), false },
     { ble::scan_interval_t(160), ble::scan_window_t(100), ble::scan_duration_t(300), false },
     { ble::scan_interval_t(160),  ble::scan_window_t(40),   ble::scan_duration_t(0), true  },
     { ble::scan_interval_t(500),  ble::scan_window_t(10),   ble::scan_duration_t(0), false }
@@ -151,6 +151,7 @@ private:
 
     virtual void onScanTimeout(const ble::ScanTimeoutEvent&) {
         printf("Stopped scanning early due to timeout parameter\r\n");
+        _event_queue.call_in(10000, this, &GapScanner::scan);
     }    
 
 private:
@@ -179,6 +180,7 @@ int main()
 
     /* this will inform us off all events so we can schedule their handling
      * using our event queue */
+    printf("Starting\n");
     ble.onEventsToProcess(schedule_ble_events);
     GapScanner scanner(ble, event_queue);
 
